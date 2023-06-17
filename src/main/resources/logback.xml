@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- CONFIGURACAO DO ARQUIVOS DE LOG, QUE FORAM CONFIGURADOS PARA LOG DIARIO
+SEM LIMITE DE TAMANHO E SEM ROLLBACK, OS ARQUIVOS DE LOG ESTAO EM src/main/resources/logs/ -->
+<configuration>
+    <timestamp key="porDia" datePattern="ddMMyyyy"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level) [%highlight(%thread)] %yellow(%C) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file> src/main/resources/logs/log-${porDia}.log </file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
